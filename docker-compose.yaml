@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  mongo_lamda:
+    image: mongo
+    restart: always
+    container_name: mongo_lamda
+    hostname: mongo_lamda
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=lambdadb
+    ports:
+      - 27017:27017
+    volumes:
+      - ./docker-entrypoint/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+      - ./data:/data/db
