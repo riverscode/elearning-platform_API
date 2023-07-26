@@ -15,4 +15,19 @@ export class UserInfrastructure implements UserRepository {
     const users = await UserModel.find();
     return users;
   }
+
+  async getCoursesByUser(userId: string) {
+    const courses = await UserModel.findById(userId).populate({
+      path: "courses",
+      select: "name slug students image",
+      match: {
+        published: { $eq: true },
+      },
+      populate: {
+        path: "instructor",
+      },
+    });
+
+    return courses;
+  }
 }

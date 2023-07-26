@@ -22,6 +22,7 @@ export default class UserController {
   constructor() {
     this.insertUser = this.insertUser.bind(this);
     this.getAllUsers = this.getAllUsers.bind(this);
+    this.getCoursesByUser = this.getCoursesByUser.bind(this);
   }
 
   async insertUser(req: Request, res: Response) {
@@ -51,6 +52,19 @@ export default class UserController {
       return res
         .status(HttpStatusCode.OK)
         .json({ result: usersResponse, error: null });
+    } catch (error) {
+      console.log(ErrorCode.GET_ALL_USERS_ERROR, error);
+      res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json(error);
+    }
+  }
+
+  async getCoursesByUser(req: Request, res: Response) {
+    const { userId } = req.params;
+    try {
+      const courses = await this.userInfrastructure.getCoursesByUser(userId);
+      return res
+        .status(HttpStatusCode.OK)
+        .json({ result: courses, error: null });
     } catch (error) {
       console.log(ErrorCode.GET_ALL_USERS_ERROR, error);
       res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json(error);
