@@ -4,6 +4,7 @@ import UserRepository from "../domain/user.repository";
 
 // ✅ APPLICATION
 import { CipherService } from "./services/cipher.service";
+import { TokenService } from "./services/token.service";
 
 export class InsertUserUseCase {
   private userRepository: UserRepository;
@@ -14,6 +15,7 @@ export class InsertUserUseCase {
 
   async execute(user: User): Promise<User> {
     user.password = await CipherService.hash(user.password);
+    user.refreshToken = TokenService.generateRefreshToken();
     const newUser: User = await this.userRepository.insert(user);
     return newUser;
   }

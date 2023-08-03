@@ -20,10 +20,6 @@ const UserSchema = new mongoose.Schema(
       default:
         "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/c_thumb,w_200,g_face/v1654909384/Lambda%20Campus/onre-piece-logo_w2t0tq.jpg",
     },
-    googleId: {
-      type: String,
-      select: false,
-    },
     role: {
       type: String,
       default: "student",
@@ -53,6 +49,14 @@ const UserSchema = new mongoose.Schema(
         ref: "Certificate",
       },
     ],
+    refreshToken: {
+      type: String,
+      required: true,
+    },
+    googleId: {
+      type: String,
+      select: false,
+    },
     passwordResetCode: {
       type: String,
       default: "",

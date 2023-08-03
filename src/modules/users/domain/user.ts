@@ -13,6 +13,7 @@ export interface UserOptionalData {
   specializations: string[];
   certificates: string[];
   passwordResetCode: string;
+  refreshToken: string;
 }
 
 export type UserCreationData = UserEssentialData & Partial<UserOptionalData>;
@@ -29,6 +30,7 @@ export class User {
   specializations: string[] | undefined;
   certificates: string[] | undefined;
   passwordResetCode: string | undefined;
+  refreshToken: string | undefined;
 
   constructor(data: UserCreationData) {
     this.name = data.name;
@@ -42,5 +44,6 @@ export class User {
     this.specializations = data.specializations;
     this.certificates = data.certificates;
     this.passwordResetCode = data.passwordResetCode;
+    this.refreshToken = data.refreshToken;
   }
 }

@@ -30,4 +30,11 @@ export class UserInfrastructure implements UserRepository {
 
     return courses;
   }
+
+  async getUserByEmail(email: string): Promise<User> {
+    const user = await UserModel.findOne({ email }).select("name email password role");
+
+    if (!user) throw new Error("User not found");
+    return user[0];
+  }
 }

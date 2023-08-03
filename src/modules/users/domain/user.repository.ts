@@ -5,4 +5,5 @@ export default interface UserRepository {
   insert(user: User): Promise<User>;
   getAll(): Promise<User[]>;
   getCoursesByUser(userId: string): Promise<Course[]>;
+  getUserByEmail(email: string): Promise<User>;
 }
